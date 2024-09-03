@@ -1,0 +1,36 @@
+name: Update README Progress
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron:  "*/3 * * * *" # Runs everyday at midnight
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Count completed tasks
+        id: count-tasks
+        run: |
+          # Count the number of '✅' in the second-to-last column (Status column)
+          count=$(grep -oP '(?<=<td align="center">)✅(?=</td>)' README.md | wc -l)
+          echo "TASK_COUNT=$count" >> $GITHUB_ENV
+
+      - name: Update README with task count
+        run: |
+          # Replace the placeholder with the actual count in the README
+          sed -i "s/{{ ACHIEVED_TASKS }}/$TASK_COUNT/g" README.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README with progress: $TASK_COUNT/150"
+          git push
