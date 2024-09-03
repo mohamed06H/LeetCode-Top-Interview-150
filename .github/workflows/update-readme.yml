@@ -30,6 +30,8 @@ jobs:
       - name: Commit and push changes
         run: |
           if ! git diff --exit-code README.md > /dev/null; then
+            git config --global user.email "actions@github.com"
+            git config --global user.name "Github Actions"
             git add README.md
             git commit -m "Update README with progress: $TASK_COUNT/150"
             git push
