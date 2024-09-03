@@ -1,4 +1,4 @@
-name: Update README Progress
+name: Update README Badge
 
 on:
   push:
@@ -18,14 +18,15 @@ jobs:
       - name: Count completed tasks
         id: count-tasks
         run: |
-          # Count the number of '✅' in the second-to-last column (Status column)
+          # Count the number of '✅' in the README file
           count=$(grep -oP '(?<=<td align="center">)✅(?=</td>)' README.md | wc -l)
           echo "TASK_COUNT=$count" >> $GITHUB_ENV
 
       - name: Update README with dynamic badge
         run: |
-          # Inject the dynamic task count into a badge URL in the README
-          sed -i "s|{{ ACHIEVED_TASKS }}|$TASK_COUNT|g" README.md
+          # Update the README file to include the dynamic badge with the current task count
+          badge_url="https://img.shields.io/badge/Progress-${TASK_COUNT}%2F150-0078D4"
+          sed -i "s|https://img.shields.io/badge/Progress-[0-9]*%2F150-0078D4|$badge_url|g" README.md
 
       - name: Commit and push changes
         run: |
@@ -33,6 +34,7 @@ jobs:
             git config --global user.email "actions@github.com"
             git config --global user.name "Github Actions"
             git add README.md
-            git commit -m "Update README with progress: $TASK_COUNT/150"
+            git commit -m "Update README badge with progress: $TASK_COUNT/150"
             git push
           fi
+
