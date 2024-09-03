@@ -81,8 +81,10 @@ Feel free to open an issue to start a discussion or ask questions. You can reach
 
 Happy Coding! 🚀
 
+<!-- UPDATE COUNT should be done through CI/CD env var:{{ ACHIEVED_TASKS }}-->
+
 <h2>Questions List <img 
-    src="https://img.shields.io/badge/Progress-00%2F150-0078D4" 
+    src="https://img.shields.io/badge/Progress-{{ ACHIEVED_TASKS }}%2F150-0078D4" 
     alt="Progress bar"
   /></h2>
 <table>
