@@ -108,8 +108,8 @@ Happy Coding! 🚀
       <td align="center"><a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank">Merge Sorted Array</a></td>
       <td align="center">Easy</td>
       <td align="center">🟢</td>
-      <td align="center"> </td>
-      <td align="center"> </td>
+      <td align="center">✅</td>
+      <td align="center"><a href="https://github.com/mohamed06H/LeetCode-Top-Interview-150/blob/main/Code/array-string/88-merge-sorted-array.py" target="_blank">Python</a></td>
     </tr>
     <tr>
       <td align="center"><a href="https://leetcode.com/problems/remove-element/description/" target="_blank">Remove Element</a></td>
