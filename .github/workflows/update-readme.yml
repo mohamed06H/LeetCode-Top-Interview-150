@@ -18,25 +18,19 @@ jobs:
       - name: Count completed tasks
         id: count-tasks
         run: |
+          # Count the number of '✅' in the second-to-last column (Status column)
           count=$(grep -oP '(?<=<td align="center">)✅(?=</td>)' README.md | wc -l)
           echo "TASK_COUNT=$count" >> $GITHUB_ENV
 
-      - name: Update README with task count
+      - name: Update README with dynamic badge
         run: |
-          sed -i "s/{{ ACHIEVED_TASKS }}/$TASK_COUNT/g" README.md
-
-      - name: Check if README was modified
-        id: check_changes
-        run: |
-          if git diff --exit-code README.md > /dev/null; then
-            echo "README_NOT_CHANGED=true" >> $GITHUB_ENV
-          else
-            echo "README_NOT_CHANGED=false" >> $GITHUB_ENV
-          fi
+          # Inject the dynamic task count into a badge URL in the README
+          sed -i "s|{{ ACHIEVED_TASKS }}|$TASK_COUNT|g" README.md
 
       - name: Commit and push changes
-        if: env.README_NOT_CHANGED == 'false'
         run: |
-          git add README.md
-          git commit -m "Update README with progress: $TASK_COUNT/150"
-          git push
+          if ! git diff --exit-code README.md > /dev/null; then
+            git add README.md
+            git commit -m "Update README with progress: $TASK_COUNT/150"
+            git push
+          fi
