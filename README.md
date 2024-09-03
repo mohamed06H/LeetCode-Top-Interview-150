@@ -77,10 +77,7 @@ git push origin new-contributions
 
 Feel free to open an issue to start a discussion or ask questions. You can reach out to me via:
 
-- **WhatsApp:** [+91 7894978567](https://wa.me/917894978567)
-- **Email:** [muhitkhan_bd@outlook.com](mailto:muhitkhan_bd@outlook.com)
-
-Let's ace those LeetCode problems together!
+- **Email:** [m.hamiche99@gmail.com](mailto:m.hamiche99@gmail.com)
 
 Happy Coding! 🚀
 
